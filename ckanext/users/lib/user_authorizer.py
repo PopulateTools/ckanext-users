@@ -30,4 +30,4 @@ class UserAuthorizer(object):
 
     @classmethod
     def is_restricted(cls):
-        return t.asbool(t.config.get('ckanext.hide_user_list'))
+        return t.asbool(t.config.get('ckanext.hide_user_list', True))
