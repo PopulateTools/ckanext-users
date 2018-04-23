@@ -5,15 +5,19 @@ class UserAuthorizer(object):
 
     @classmethod
     def show(cls, context, data_dict=None):
+        controller_name = t.c.controller
+        action_name = t.c.action
         current_user = context['auth_user_obj']
-        requested_user_name = t.c.id
 
-        if current_user == None:
-            success = False
-        elif current_user.name == requested_user_name:
+        if not cls.is_restricted():
             success = True
+        elif current_user == None:
+            success = False
+        elif controller_name == 'user' and action_name == 'read':
+            requested_user_name = t.c.id
+            success = (current_user.name == requested_user_name)
         else:
-            success = not cls.is_restricted()
+            success = True
 
         return { 'success': success }
 
