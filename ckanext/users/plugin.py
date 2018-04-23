@@ -1,13 +1,34 @@
-import ckan.plugins as plugins
-import ckan.plugins.toolkit as toolkit
+import ckan.plugins as p
+import ckan.plugins.toolkit as t
+
+from ckan.lib.plugins import DefaultTranslation
+from ckanext.users.lib.user_authorizer import UserAuthorizer
 
 
-class UsersPlugin(plugins.SingletonPlugin):
-    plugins.implements(plugins.IConfigurer)
+class UsersPlugin(p.SingletonPlugin, DefaultTranslation):
+
+    p.implements(p.IConfigurer)
+    p.implements(p.ITranslation)
+    p.implements(p.IAuthFunctions)
 
     # IConfigurer
 
     def update_config(self, config_):
-        toolkit.add_template_directory(config_, 'templates')
-        toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'users')
+        t.add_template_directory(config_, 'templates')
+
+    def update_config_schema(self, schema):
+        boolean_validator = t.get_validator('boolean_validator')
+
+        schema.update({
+            'ckanext.hide_user_list': [ boolean_validator ],
+        })
+
+        return schema
+
+    ## IAuthFunctions
+
+    def get_auth_functions(self):
+        return {
+            'user_show': UserAuthorizer.show,
+            'user_list': UserAuthorizer.list
+        }

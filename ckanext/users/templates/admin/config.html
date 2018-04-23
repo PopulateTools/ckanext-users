@@ -1,0 +1,24 @@
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+
+{% block admin_form %}
+
+  {{ super() }}
+
+  <h3>{{ _('Opciones personalizadas') }}</h3>
+
+  {% set checked = (data['ckanext.hide_user_list'] == 'True') %}
+
+  {{ form.checkbox('ckanext.hide_user_list', label=_('Restringir listado de usuarios'), id='field-ckanext.hide_user_list', value=True, checked=checked ) }}
+
+{% endblock %}
+
+
+{% block admin_form_help %}
+
+  {{ super() }}
+
+  <p><strong>{{ _('Restringir listado de usuarios') }}:</strong> {{ _('Oculta el listado de usuarios a los usuarios externos') }}</p>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% ckan_extends %}
+
+<!-- Hide link to user list if not authorized -->
+{% block breadcrumb_content %}
+
+  {% if c.userobj.sysadmin %}
+    {{ super() }}
+  {% else %}
+    <li>{{ _('Users') }}</li>
+    {{ h.build_nav('user_datasets', user.display_name|truncate(35), id=user.name) }}
+  {% endif %}
+
+{% endblock %}

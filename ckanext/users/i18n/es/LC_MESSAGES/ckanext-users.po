@@ -1,0 +1,16 @@
+#: ckanext/users/templates/admin/config.html:9
+msgid "Opciones personalizadas"
+msgstr ""
+
+#: ckanext/users/templates/admin/config.html:13
+#: ckanext/users/templates/admin/config.html:22
+msgid "Restringir listado de usuarios"
+msgstr ""
+
+#: ckanext/users/templates/admin/config.html:22
+msgid "Oculta el listado de usuarios a los usuarios externos"
+msgstr ""
+
+#: ckanext/users/templates/user/read_base.html:9
+msgid "Users"
+msgstr "Usuarios"
