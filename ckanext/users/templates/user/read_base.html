@@ -6,7 +6,7 @@
   {% if c.userobj.sysadmin %}
     {{ super() }}
   {% else %}
-    <li>{{ _('Users') }}</li>
+    <li><span>{{ _('Users') }}</span></li>
     {{ h.build_nav('user_datasets', user.display_name|truncate(35), id=user.name) }}
   {% endif %}
 
